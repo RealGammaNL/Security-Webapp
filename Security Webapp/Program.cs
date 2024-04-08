@@ -1,13 +1,24 @@
+using Microsoft.EntityFrameworkCore;
+using Domain.Data;
+using Microsoft.Identity.Client.Extensions.Msal;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<SecurityDb>(options =>
+    options.UseSqlServer(
+        connectionString,
+        x => x.MigrationsAssembly("Security Webapp")
+    )
+);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthorization(); // Add this line
 
 var app = builder.Build();
 
-// Program.cs connection to database.
-builder.Services.AddDbContext<SecurityDb>(DbContextOptions => DbContextOptions.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

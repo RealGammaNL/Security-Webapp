@@ -3,15 +3,21 @@
 }
 
 <div class="text-center">
-    <div class="text-under">
-        <label for="dataToEncrypt">Add the data you want to encrypt and send to the database:</label>
-        <textarea id="dataToEncrypt" name="dataToEncrypt" rows="4"></textarea>
-        <button type="submit" id="encryptButton">Send</button>
-    </div>
+    <form method="post" action="@Url.Action("EncryptAndSave", "Home")">
+        <div class="text-under">
+            <label for="dataToEncrypt">Add the data you want to encrypt and send to the database:</label>
+            <textarea id="dataToEncrypt" name="dataToEncrypt" rows="4"></textarea>
+            <button type="submit" id="encryptButton">Send</button>
+        </div>
+    </form>
 
-    <div class="text-under">
-        <button type="button" id="decryptButton">Get Data Back</button>
-        <label for="decryptedData">Decrypted Data:</label>
-        <textarea id="decryptedData" name="decryptedData" rows="4" readonly></textarea>
-    </div>
+    <form method="get" action="@Url.Action("GetAndDecryptData", "Home")">
+        <div class="text-under">
+            <label for="dataId">Enter the ID of the data you want to retrieve:</label>
+            <input type="text" id="dataId" name="id" />
+            <button type="submit" id="decryptButton">Get Data Back</button>
+            <label for="decryptedData">Decrypted Data:</label>
+            <textarea id="decryptedData" name="decryptedData" rows="4" readonly>@ViewBag.DecryptedData</textarea>
+        </div>
+    </form>
 </div>

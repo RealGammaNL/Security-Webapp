@@ -5,10 +5,7 @@ VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Security Webapp", "Security Webapp\Security Webapp.csproj", "{733C1F1B-6D58-4C9E-9F58-B2C6F05882ED}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{3439C550-A3FC-4593-B138-C99CE5A18318}"
-	ProjectSection(SolutionItems) = preProject
-		Class1.cs = Class1.cs
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{17FB736A-420D-4E8F-95FF-0B05553199D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +17,10 @@ Global
 		{733C1F1B-6D58-4C9E-9F58-B2C6F05882ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{733C1F1B-6D58-4C9E-9F58-B2C6F05882ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{733C1F1B-6D58-4C9E-9F58-B2C6F05882ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17FB736A-420D-4E8F-95FF-0B05553199D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FB736A-420D-4E8F-95FF-0B05553199D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FB736A-420D-4E8F-95FF-0B05553199D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FB736A-420D-4E8F-95FF-0B05553199D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
