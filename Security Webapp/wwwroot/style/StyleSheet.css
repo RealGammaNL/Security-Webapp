@@ -1,0 +1,38 @@
+﻿.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px; /* Adjust this value as needed */
+    
+}
+
+    .text-center div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 100px;
+    }
+
+.text-center input, .text-center button {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+}
+
+.text-under{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#dataToEncrypt {
+    width: 400px;
+}
+
+#decryptedData {
+    width: 400px;
+}

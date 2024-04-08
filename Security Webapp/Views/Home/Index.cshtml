@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div class="text-under">
+        <label for="dataToEncrypt">Add the data you want to encrypt and send to the database:</label>
+        <textarea id="dataToEncrypt" name="dataToEncrypt" rows="4"></textarea>
+        <button type="submit" id="encryptButton">Send</button>
+    </div>
+
+    <div class="text-under">
+        <button type="button" id="decryptButton">Get Data Back</button>
+        <label for="decryptedData">Decrypted Data:</label>
+        <textarea id="decryptedData" name="decryptedData" rows="4" readonly></textarea>
+    </div>
+</div>
