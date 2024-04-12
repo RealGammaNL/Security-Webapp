@@ -8,6 +8,7 @@ using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Security_Webapp.Controllers
 {
@@ -35,14 +36,20 @@ namespace Security_Webapp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> EncryptAndSave(string dataToEncrypt)
+        public class EncryptModel
         {
-            var _EncryptionService = new EncryptionService();
+            public string EncryptedData { get; set; }
+        }
 
-            var encryptedData = _EncryptionService.Encrypt(dataToEncrypt);
 
-            var data = new DataItem { Description = encryptedData };
+        [HttpPost]
+        public async Task<IActionResult> EncryptAndSave([FromBody] EncryptModel model)
+        {
+            //var _EncryptionService = new EncryptionService();
+
+            //var encryptedData = _EncryptionService.Encrypt(dataToEncrypt);
+
+            var data = new DataItem { Description = model.EncryptedData };
 
             _context.Add(data);
             await _context.SaveChangesAsync();
@@ -52,8 +59,6 @@ namespace Security_Webapp.Controllers
 
         public async Task<string> ReturnDecryptedData(int id)
         {
-            var _EncryptionService = new EncryptionService();
-
             // Retrieve the data item from the database
             var dataItem = await _context.DataItems.FindAsync(id);
 
@@ -62,18 +67,17 @@ namespace Security_Webapp.Controllers
                 return null;
             }
 
-            // Decrypt the data
-            var decryptedData = _EncryptionService.Decrypt(dataItem.Description);
-
-            return decryptedData;
+            // Return the encrypted data
+            return dataItem.Description;
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> GetAndDecryptData(int id)
         {
-            var decryptedData = await ReturnDecryptedData(id);
-            ViewBag.DecryptedData = decryptedData;
-            return View("Index");
+            var _encryptedData = await ReturnDecryptedData(id);
+            return Json(new { encryptedData = _encryptedData });
         }
     }
 }

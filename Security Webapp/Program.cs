@@ -19,7 +19,6 @@ builder.Services.AddAuthorization(); // Add this line
 
 var app = builder.Build();
 
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
