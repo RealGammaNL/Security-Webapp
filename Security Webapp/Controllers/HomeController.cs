@@ -9,9 +9,17 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using Microsoft.Identity.Client.Extensions.Msal;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using static System.Net.WebRequestMethods;
+using System.ComponentModel;
+using System;
+
+//This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later version.
+//This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU General Public License for more details.
+//You should have received a copy of the GNU General Public License along with this program.If not, see<https://www.gnu.org/licenses/>. 
 
 namespace Security_Webapp.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly SecurityDb _context;
@@ -45,10 +53,6 @@ namespace Security_Webapp.Controllers
         [HttpPost]
         public async Task<IActionResult> EncryptAndSave([FromBody] EncryptModel model)
         {
-            //var _EncryptionService = new EncryptionService();
-
-            //var encryptedData = _EncryptionService.Encrypt(dataToEncrypt);
-
             var data = new DataItem { Description = model.EncryptedData };
 
             _context.Add(data);

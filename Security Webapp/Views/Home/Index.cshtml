@@ -2,16 +2,18 @@
     ViewData["Title"] = "Home Page";
 }
 
+@*  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or(at your option) any later version.
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along with this program.If not, see https://www.gnu.org/licenses. *@
+
+
 <div class="text-center">
-    @* <form method="post" action="@Url.Action("EncryptAndSave", "Home")"> *@
         <div class="text-under">
             <label for="dataToEncrypt">Add the data you want to encrypt and send to the database:</label>
             <textarea id="dataToEncrypt" name="EncryptedData" rows="4"></textarea>
             <button type="button" id="encryptButton">Send</button>
         </div>
-    @* </form> *@
 
-    @* <form method="get" action="@Url.Action("GetAndDecryptData", "Home")"> *@
         <div class="text-under">
             <label for="dataId">Enter the ID of the data you want to retrieve:</label>
             <input type="text" id="dataId" name="id" />
@@ -19,106 +21,7 @@
             <label for="decryptedData">Decrypted Data:</label>
             <textarea id="decryptedData" name="decryptedData" rows="4" readonly>@ViewBag.DecryptedData</textarea>
         </div>
-    @* </form> *@
 </div>
-
-@* <script>
-    let key = new TextEncoder().encode("RUNEMAXSOULAIMAN").buffer;
-    let iv = new TextEncoder().encode("SOULAIMANMAX").buffer;
-
-    // generateKeyAndIv()
-    // async function generateKeyAndIv() {
-    //     key = await window.crypto.subtle.generateKey(
-    //         {
-    //             name: "AES-GCM",
-    //             length: 256,
-    //         },
-    //         true,
-    //         ["encrypt", "decrypt"]
-    //     );
-
-    //     window.alert(key)
-    //     // Generate a random initialization vector
-    //     iv = window.crypto.getRandomValues(new Uint8Array(12));
-    //     window.alert(iv)
-    // }
-
-    async function encryptData(data, key, iv) {
-        // Convert the data to an ArrayBuffer
-        const encoder = new TextEncoder();
-        const dataBuffer = encoder.encode(data);
-
-        // Encrypt the data
-        const encryptedData = await window.crypto.subtle.encrypt(
-            {
-                name: "AES-GCM",
-                iv: iv, // Use the iv from the higher scope
-            },
-            key,
-            dataBuffer
-        );
-
-        return encryptedData;
-    }
-
-    document.getElementById('encryptButton').addEventListener('click', async function (event) {
-        // Prevent the default form submission
-        event.preventDefault();
-
-        const dataToEncrypt = document.getElementById('dataToEncrypt').value;
-        const encryptedData = await encryptData(dataToEncrypt);
-
-        // Convert the encrypted data to a format that can be sent to the server
-        const encryptedDataString = btoa(String.fromCharCode(...new Uint8Array(encryptedData)));
-
-        // Create a new FormData object and append the encrypted data
-        const formData = new FormData();
-        formData.append('EncryptedData', encryptedDataString);
-
-        // Manually submit the form data to the server
-        fetch('@Url.Action("EncryptAndSave", "Home")', {
-            method: 'POST',
-            body: formData
-        });
-    });
-
-    async function decryptData(encryptedData, key, iv) {
-        // Decrypt the data
-        const decryptedData = await window.crypto.subtle.decrypt(
-            {
-                name: "AES-GCM",
-                iv: iv,
-            },
-            key,
-            encryptedData
-        );
-
-        // Convert the decrypted data back to a string
-        const decoder = new TextDecoder();
-        const decryptedDataString = decoder.decode(decryptedData);
-
-        return decryptedDataString;
-    }
-
-    document.getElementById('decryptButton').addEventListener('click', async function (event) {
-        // Prevent the default form submission
-        event.preventDefault();
-
-        const dataId = document.getElementById('dataId').value;
-
-        // Send a GET request to the server to retrieve the encrypted data
-        const response = await fetch('@Url.Action("GetAndDecryptData", "Home")' + '?id=' + dataId);
-        const data = await response.json();
-       
-        const encryptedData = new Uint8Array(atob(data.encryptedData).split("").map(char => char.charCodeAt(0)));
-
-        const decryptedData = await decryptData(encryptedData, key, iv);
-
-        // Display the decrypted data in the 'decryptedData' textarea
-        document.getElementById('decryptedData').value = decryptedData;
-    });
-
-</script> *@
 
 
 <script>
@@ -175,6 +78,5 @@
         const decryptedData = await decryptData(encryptedData.buffer);
         document.getElementById('decryptedData').value = decryptedData;
     });
-
 </script>
 
